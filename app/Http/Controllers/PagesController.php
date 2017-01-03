@@ -19,9 +19,10 @@ class PagesController extends Controller
 
 	public function search() {
 
-		$results = (new TorrentScraperService(['thePirateBay']))->search(request()->dork);
+		$search = request()->search;
+		$results = (new TorrentScraperService(['thePirateBay']))->search($search);
 
-		return View::make('index', compact('results'));
+		return View::make('index', compact('search', 'results'));
 
 	}
 

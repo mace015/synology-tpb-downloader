@@ -4,6 +4,7 @@ body {
 
 table {
     border-collapse: collapse;
+    min-width: 500px;
     width: auto;
 }
 
@@ -17,6 +18,10 @@ tr:nth-child(even){background-color: #f2f2f2}
 th {
     background-color: #4CAF50;
     color: white;
+}
+
+.center {
+	text-align: center;
 }
 
 input {

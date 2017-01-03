@@ -11,31 +11,33 @@
 		
 		{!! Form::open() !!}
 
-			<input name="dork" />
+			<input name="search" value="{{ ((isset($search))? $search : '') }}" />
 			<button type="submit"> Search </button>
 
 		{!! Form::close() !!}
 
-		@if(!isset($results))
-			<p>No results found.</p>
-		@else
-			<table>
-				<thead>
-					<th> Name </th>
-					<th> Seeders </th>
-					<th> Link </th>
-					<th> Magnet </th>
-				</thead>
-				@foreach($results as $result)
-					<tr>
-						<td> {{ $result->getName() }} </td>
-						<td> {{ $result->getSeeders() }} </td>
-						<td> <a href="{{ $result->getTorrentUrl() }}"> Link </a> </td>
-						<td> <a href="{{ $result->getMagnetUrl() }}"> Magnet </a> </td>
-					</tr>
-				@endforeach
-			</table>
-		@endif
+		<table>
+			<thead>
+				<th> Name </th>
+				<th> Seeders </th>
+				<th> Link </th>
+				<th> Magnet </th>
+			</thead>
+			<tbody>
+				@if(!isset($results) || count($results) == 0)
+					<tr> <td colspan="4" class="center"> @if(!empty($search)) No results found @else No search query @endif </td> </tr>
+				@else
+					@foreach($results as $result)
+						<tr>
+							<td> {{ $result->getName() }} </td>
+							<td> {{ $result->getSeeders() }} </td>
+							<td> <a href="{{ $result->getTorrentUrl() }}"> Link </a> </td>
+							<td> <a href="{{ $result->getMagnetUrl() }}"> Magnet </a> </td>
+						</tr>
+					@endforeach
+				@endif
+			</tbody>
+		</table>
 
 	</body>
 </html>
