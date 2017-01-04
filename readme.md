@@ -9,6 +9,7 @@ This application is meant to be used with a Synology NAS to easily activate torr
 - A search interface to search TPB for any torrents. ( **Done** )
 - Activating downloads directly on your Synology NAS.
 - Show active downloads on the Synology Download Station.
+- Protect the application via a simple authentication system.
 - Rebuilding the search interface with vue.js to provide a more fluent experience.
 
 
