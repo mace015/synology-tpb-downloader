@@ -11,9 +11,9 @@ use View;
 class PagesController extends Controller
 {
     
-	public function index() {
+	public function index($search = '', $results = []) {
 
-		return View::make('index');
+		return View::make('index', compact('search', 'results'));
 
 	}
 
@@ -22,7 +22,7 @@ class PagesController extends Controller
 		$search = request()->search;
 		$results = (new TorrentScraperService(['thePirateBay']))->search($search);
 
-		return View::make('index', compact('search', 'results'));
+		return $this->index($search, $results);
 
 	}
 
