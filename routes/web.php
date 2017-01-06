@@ -14,4 +14,5 @@
 Route::get('/', ['as' => 'index', 'uses' => 'PagesController@index']);
 Route::post('/', ['uses' => 'PagesController@search']);
 
-Route::post('/downlaod', ['uses' => 'DownloadController@download']);
+Route::post('/download', ['uses' => 'DownloadController@download']);
+Route::get('/download/delete/{id}', ['as' => 'download.delete', 'uses' => 'DownloadController@deleteDownload']);

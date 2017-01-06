@@ -31,7 +31,7 @@ input {
 	min-width: 400px;
 }
 
-button {
+.green-button {
 	text-align: left;
     padding: 8px;
 	background-color: #4CAF50;

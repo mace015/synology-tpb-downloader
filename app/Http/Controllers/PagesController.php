@@ -13,7 +13,14 @@ class PagesController extends Controller
     
 	public function index($search = '', $results = []) {
 
-		return View::make('index', compact('search', 'results'));
+		require(base_path(). '/vendor/zzarbi/synology/src/Synology/DownloadStation/Api.php');
+
+		$synology = new \Synology_DownloadStation_Api(config('synology.host'), config('synology.port'), config('synology.protocol'), 1);
+		$synology->connect(config('synology.user'), config('synology.password'));
+
+		$downloads = $synology->getTaskList();
+
+		return View::make('index', compact('search', 'results', 'downloads'));
 
 	}
 

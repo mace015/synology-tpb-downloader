@@ -12,16 +12,39 @@
 		{!! Form::open() !!}
 
 			<input name="search" value="{{ ((isset($search))? $search : '') }}" />
-			<button type="submit"> Search </button>
+			<button type="submit" class="green-button"> Search </button>
 
 		{!! Form::close() !!}
 
 		<table>
 			<thead>
 				<th> Name </th>
+				<th> Status </th>
+				<th> Delete </th>
+			</thead>
+			<tbody>
+				@if(count($downloads->tasks) == 0)
+					<tr>
+						<td colspan="3"> No active downloads </td>
+					</tr>
+				@endif
+				@foreach($downloads->tasks as $download)
+					<tr>
+						<td> {{ $download->title }} </td>
+						<td> {{ ucfirst($download->status) }} </td>
+						<td> <a href="{{ URL::route('download.delete', $download->id) }}"> Delete </a> </td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+
+		<br>
+
+		<table>
+			<thead>
+				<th> Name </th>
 				<th> Seeders </th>
-				<th> Link </th>
-				<th> Magnet </th>
+				<th> Download </th>
 			</thead>
 			<tbody>
 				@if(!isset($results) || count($results) == 0)
@@ -31,8 +54,12 @@
 						<tr>
 							<td> {{ $result->getName() }} </td>
 							<td> {{ $result->getSeeders() }} </td>
-							<td> <a href="{{ $result->getTorrentUrl() }}"> Link </a> </td>
-							<td> <a href="{{ $result->getMagnetUrl() }}"> Magnet </a> </td>
+							<td>
+								{{ Form::open(['action' => 'DownloadController@download']) }}
+									<input type="hidden" name="magnet" value="{{ $result->getMagnetUrl() }}">
+									<button type="submit"> Download </button>
+								{{ Form::close() }}
+							</td>
 						</tr>
 					@endforeach
 				@endif
