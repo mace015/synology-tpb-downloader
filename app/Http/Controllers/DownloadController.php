@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Repositories\DownloadStation;
+
 use Redirect;
 
 class DownloadController extends Controller
@@ -11,10 +13,9 @@ class DownloadController extends Controller
     
 	public function download() {
 
-		$synology = new \Synology_DownloadStation_Api(config('synology.host'), config('synology.port'), config('synology.protocol'), 1);
-		$synology->connect(config('synology.user'), config('synology.password'));
+		$downloadStation = new DownloadStation();
 
-		$download = $synology->addTask(request()->magnet);
+		$download = $downloadStation->api()->addTask(request()->magnet);
 
 		return Redirect::back()->withSuccess('Download task has been added');
 
@@ -22,10 +23,9 @@ class DownloadController extends Controller
 
 	public function deleteDownload($id) {
 
-		$synology = new \Synology_DownloadStation_Api(config('synology.host'), config('synology.port'), config('synology.protocol'), 1);
-		$synology->connect(config('synology.user'), config('synology.password'));
+		$downloadStation = new DownloadStation();
 
-		$download = $synology->deleteTask($id);
+		$download = $downloadStation->api()->deleteTask($id);
 
 		return Redirect::back()->withSuccess('Download task has been deleted');
 
