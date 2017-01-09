@@ -24,12 +24,12 @@
     <!-- This "nav-menu" is hidden on mobile -->
     <!-- Add the modifier "is-active" to display it on mobile -->
     <div class="nav-right nav-menu">
-        <a class="nav-item">
-            Home
-        </a>
 
         <span class="nav-item">
-            <a class="button">
+            <a class="button" href="{{ URL::route('logout') }}">
+                <span class="icon">
+                    <i class="fa fa-sign-out"></i>
+                </span>
                 <span>Logout</span>
             </a>
         </span>

@@ -16,7 +16,7 @@ class DownloadController extends Controller
 
 		$download = $synology->addTask(request()->magnet);
 
-		return Redirect::back();
+		return Redirect::back()->withSuccess('Download task has been added');
 
 	}
 
@@ -27,7 +27,7 @@ class DownloadController extends Controller
 
 		$download = $synology->deleteTask($id);
 
-		return Redirect::back();
+		return Redirect::back()->withSuccess('Download task has been deleted');
 
 	}
 

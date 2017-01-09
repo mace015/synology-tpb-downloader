@@ -11,8 +11,21 @@
 |
 */
 
-Route::get('/', ['as' => 'index', 'uses' => 'PagesController@index']);
-Route::post('/', ['uses' => 'PagesController@search']);
+Route::group(['middleware' => 'auth'], function () {
 
-Route::post('/download', ['uses' => 'DownloadController@download']);
-Route::get('/download/delete/{id}', ['as' => 'download.delete', 'uses' => 'DownloadController@deleteDownload']);
+	Route::get('/', 'PagesController@index')->name('index');
+	Route::post('/', 'PagesController@search');
+
+	Route::get('/logout', 'AuthController@logout')->name('logout');
+
+	Route::post('/download', 'DownloadController@download');
+	Route::get('/download/delete/{id}', 'DownloadController@deleteDownload')->name('download.delete');
+
+});
+
+Route::group(['middleware' => 'guest'], function () {
+
+	Route::get('/login', 'AuthController@loginForm')->name('login');
+	Route::post('/login', 'AuthController@login');
+
+});
