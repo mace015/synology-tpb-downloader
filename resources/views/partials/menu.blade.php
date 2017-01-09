@@ -1,6 +1,6 @@
 <nav class="nav">
     <div class="nav-left">
-        <a class="nav-item">
+        <a href="{{ URL::route('index') }}" class="nav-item">
             <img src="{{ asset('img/Synology-TPB-Downloader.png') }}" alt="Bulma logo">
         </a>
     </div>
