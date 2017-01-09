@@ -25,13 +25,15 @@
     <!-- Add the modifier "is-active" to display it on mobile -->
     <div class="nav-right nav-menu">
 
-        <span class="nav-item">
-            <a class="button" href="{{ URL::route('logout') }}">
-                <span class="icon">
-                    <i class="fa fa-sign-out"></i>
-                </span>
-                <span>Logout</span>
-            </a>
-        </span>
+        @if(Auth::check())
+            <span class="nav-item">
+                <a class="button" href="{{ URL::route('logout') }}">
+                    <span class="icon">
+                        <i class="fa fa-sign-out"></i>
+                    </span>
+                    <span>Logout</span>
+                </a>
+            </span>
+        @endif
     </div>
 </nav>
