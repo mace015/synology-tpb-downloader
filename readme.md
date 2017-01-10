@@ -16,6 +16,6 @@ This application is meant to be used with a Synology NAS to easily activate torr
 
 - Clone this project.
 - Copy the .env.example file to .env and add your database and NAS details.
-- Run `composer install` and `php artisan migrate`.
+- Run `composer install`, `gulp` and `php artisan migrate`.
 - Next, make a user with `php artisan make:user`.
 - Now you're all set to go!
