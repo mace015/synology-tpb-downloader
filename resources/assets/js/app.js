@@ -21,10 +21,16 @@ const app = new Vue({
 
 $(document).ready(function() {
 
-	$('.button').click(function(){
+	$('.button').click(function() {
 
 		$(this).addClass('is-loading');
 		$('.button').addClass('is-disabled');
+
+	});
+
+	$('.delete').click(function() {
+
+		$(this).parents('.notification').remove();
 
 	});
 
