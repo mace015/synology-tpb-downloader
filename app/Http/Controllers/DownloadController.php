@@ -10,6 +10,16 @@ use Redirect;
 
 class DownloadController extends Controller
 {
+
+	public function downloads() {
+
+		$downloadStation = new DownloadStation();
+
+		$downloads = $downloadStation->api()->getTaskList();
+
+		return json_encode($downloads);
+
+	}
     
 	public function download() {
 
@@ -17,7 +27,7 @@ class DownloadController extends Controller
 
 		$download = $downloadStation->api()->addTask(request()->magnet);
 
-		return Redirect::back()->withSuccess('Download task has been added');
+		return json_encode($download);
 
 	}
 
@@ -27,8 +37,7 @@ class DownloadController extends Controller
 
 		$download = $downloadStation->api()->deleteTask($id);
 
-		return Redirect::back()->withSuccess('Download task has been deleted');
-
+		return json_encode($download);
 	}
 
 }

@@ -6,18 +6,12 @@ use Illuminate\Http\Request;
 
 use Xurumelous\TorrentScraper\TorrentScraperService;
 
-use App\Repositories\DownloadStation;
-
 use View;
 
 class PagesController extends Controller
 {
     
-	public function index($search = '', $results = []) {
-
-		$downloadStation = new DownloadStation();
-
-		$downloads = $downloadStation->api()->getTaskList();
+	public function index() {
 
 		return View::make('index', compact('search', 'results', 'downloads'));
 
@@ -28,7 +22,7 @@ class PagesController extends Controller
 		$search = request()->search;
 		$results = (new TorrentScraperService(['thePirateBay']))->search($search);
 
-		return $this->index($search, $results);
+		return json_encode($results);
 
 	}
 

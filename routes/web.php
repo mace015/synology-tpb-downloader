@@ -14,12 +14,14 @@
 Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/', 'PagesController@index')->name('index');
-	Route::post('/', 'PagesController@search');
+
+	Route::post('/search', 'PagesController@search');
+
+	Route::post('/downloads', 'DownloadController@downloads');
+	Route::post('/download', 'DownloadController@download');
+	Route::post('/download/delete/{id}', 'DownloadController@deleteDownload');
 
 	Route::get('/logout', 'AuthController@logout')->name('logout');
-
-	Route::post('/download', 'DownloadController@download');
-	Route::get('/download/delete/{id}', 'DownloadController@deleteDownload')->name('download.delete');
 
 });
 
