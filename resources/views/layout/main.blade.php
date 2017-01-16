@@ -30,6 +30,10 @@
 			</div>
 		</section>
 
+		<script>
+		    window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+		</script>
+
 		<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
 
 	</body>

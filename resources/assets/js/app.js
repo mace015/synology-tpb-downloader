@@ -13,11 +13,47 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-/* Vue.component('example', require('./components/Example.vue'));
-
 const app = new Vue({
-    el: '#app'
-}); */
+
+    el: '#app',
+
+    data() {
+    	return {
+    		downloads: [],
+    		query: '',
+    		results: []
+    	}
+    },
+
+    mounted() {
+    	this.getDownloads();
+    },
+
+    methods: {
+    	search() {
+    		var query = this.query;
+    		this.$http.post('/search', { search: query }).then((res) => {
+				this.results = res.body;
+			});
+    	},
+    	getDownloads() {
+    		this.$http.post('/downloads').then((res) => {
+				this.downloads = res.body;
+			});
+    	},
+    	startDownload(magnet) {
+    		this.$http.post('/download', { magnet: magnet }).then((download) => {
+				this.getDownloads();
+			});
+    	},
+    	removeDownload(id) {
+    		this.$http.post('/download/delete', { id: id }).then((download) => {
+				this.getDownloads();
+			});
+    	}
+    }
+
+});
 
 $(document).ready(function() {
 

@@ -19,10 +19,19 @@ class PagesController extends Controller
 
 	public function search() {
 
-		$search = request()->search;
-		$results = (new TorrentScraperService(['thePirateBay']))->search($search);
+		$torrents = [];
 
-		return json_encode($results);
+		$results = (new TorrentScraperService(['thePirateBay']))->search(request()->search);
+
+		foreach ($results as $result) {
+			$torrents[] = [
+				'name'    => $result->getName(),
+				'seeders' => $result->getSeeders(),
+				'magnet'  => $result->getMagnetUrl()
+			];
+		}
+
+		return $torrents;
 
 	}
 

@@ -17,7 +17,7 @@ class DownloadController extends Controller
 
 		$downloads = $downloadStation->api()->getTaskList();
 
-		return json_encode($downloads);
+		return $downloads->tasks;
 
 	}
     
@@ -27,17 +27,17 @@ class DownloadController extends Controller
 
 		$download = $downloadStation->api()->addTask(request()->magnet);
 
-		return json_encode($download);
+		return 'true';
 
 	}
 
-	public function deleteDownload($id) {
+	public function deleteDownload() {
 
 		$downloadStation = new DownloadStation();
 
-		$download = $downloadStation->api()->deleteTask($id);
+		$download = $downloadStation->api()->deleteTask(request()->id);
 
-		return json_encode($download);
+		return 'true';
 	}
 
 }

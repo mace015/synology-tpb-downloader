@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('/downloads', 'DownloadController@downloads');
 	Route::post('/download', 'DownloadController@download');
-	Route::post('/download/delete/{id}', 'DownloadController@deleteDownload');
+	Route::post('/download/delete', 'DownloadController@deleteDownload');
 
 	Route::get('/logout', 'AuthController@logout')->name('logout');
 
