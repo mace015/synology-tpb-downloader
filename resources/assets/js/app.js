@@ -21,7 +21,9 @@ const app = new Vue({
     	return {
     		downloads: [],
     		query: '',
-    		results: []
+    		results: [],
+    		is_loading_downloads: false,
+    		is_loading_results: false
     	}
     },
 
@@ -31,14 +33,17 @@ const app = new Vue({
 
     methods: {
     	search() {
-    		var query = this.query;
-    		this.$http.post('/search', { search: query }).then((res) => {
+    		this.is_loading_results = true;
+    		this.$http.post('/search', { search: this.query }).then((res) => {
 				this.results = res.body;
+				this.is_loading_results = false;
 			});
     	},
     	getDownloads() {
+    		this.is_loading_downloads = true;
     		this.$http.post('/downloads').then((res) => {
 				this.downloads = res.body;
+				this.is_loading_downloads = false;
 			});
     	},
     	startDownload(magnet) {
