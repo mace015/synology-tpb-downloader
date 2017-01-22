@@ -27,7 +27,7 @@
 
         @if(Auth::check())
             <span class="nav-item">
-                <a class="button" href="{{ URL::route('logout') }}">
+                <a class="button logout" href="{{ URL::route('logout') }}">
                     <span class="icon">
                         <i class="fa fa-sign-out"></i>
                     </span>

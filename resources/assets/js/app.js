@@ -46,14 +46,20 @@ const app = new Vue({
 				this.is_loading_downloads = false;
 			});
     	},
-    	startDownload(magnet) {
+    	startDownload(magnet, event) {
+            var element = event.currentTarget;
+            $(element).addClass('is-loading');
     		this.$http.post('/download', { magnet: magnet }).then((download) => {
 				this.getDownloads();
+                $(element).removeClass('is-loading');
 			});
     	},
-    	removeDownload(id) {
+    	removeDownload(id, event) {
+            var element = event.currentTarget;
+            $(element).addClass('is-loading');
     		this.$http.post('/download/delete', { id: id }).then((download) => {
 				this.getDownloads();
+                $(element).removeClass('is-loading');
 			});
     	}
     }
@@ -62,10 +68,10 @@ const app = new Vue({
 
 $(document).ready(function() {
 
-	$('.button').click(function() {
+	$('.logout').click(function() {
 
 		$(this).addClass('is-loading');
-		$('.button').addClass('is-disabled');
+        $('.button').addClass('is-disabled');
 
 	});
 

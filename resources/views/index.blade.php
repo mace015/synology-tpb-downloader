@@ -20,8 +20,8 @@
 			<tr v-for="download in downloads">
 				<td> @{{ download.title }} </td>
 				<td> @{{ download.status }}</td>
-				<td> 
-					<a class="button is-danger is-pulled-right" @click="removeDownload(download.id)"> 
+				<td>
+					<a class="button is-danger is-pulled-right" @click="removeDownload(download.id, $event)">
 						<span class="icon is-small"> <i class="fa fa-trash"></i> </span>
 						<span> Delete </span>
 					</a>
@@ -34,9 +34,9 @@
 
 	<label class="label">Search</label>
 	<p class="control has-addons">
-		<input class="input is-expanded" name="search" value="" v-model="query" @keyup.enter="search()" />
+		<input class="input is-expanded" name="search" value="" autocomplete="off" v-model="query" @keyup.enter="search()" />
 
-		<button type="submit" class="button is-primary" @click="search()">
+		<button type="submit" class="button is-primary" v-bind:class="{ 'is-loading': is_loading_results }" @click="search()">
 			<span class="icon is-small"> <i class="fa fa-search"></i> </span>
 			<span> Search </span>
 		</button>
@@ -59,13 +59,13 @@
 				<td> @{{ result.name }} </td>
 				<td> @{{ result.seeders }} </td>
 				<td>
-					<button type="submit" class="button is-primary is-pulled-right" @click="startDownload(result.magnet)">
+					<button type="submit" class="button is-primary is-pulled-right" @click="startDownload(result.magnet, $event)">
 						<span class="icon is-small"> <i class="fa fa-download"></i> </span>
-						<span> Download </span> 
+						<span> Download </span>
 					</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	
+
 @endsection
