@@ -7,3 +7,9 @@
 
 // Font-awesome
 @import "node_modules/font-awesome/scss/font-awesome.scss";
+
+input,
+select:focus,
+textarea {
+  font-size: 16px;
+}
