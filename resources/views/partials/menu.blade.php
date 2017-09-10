@@ -27,6 +27,9 @@
 
         @if(Auth::check())
             <span class="nav-item">
+                Logged in as: {{ Auth::user()->username }}
+            </span>
+            <span class="nav-item">
                 <a class="button logout" href="{{ URL::route('logout') }}">
                     <span class="icon">
                         <i class="fa fa-sign-out"></i>
