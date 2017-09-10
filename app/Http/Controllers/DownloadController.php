@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Repositories\DownloadStation;
 
-
 class DownloadController extends Controller
 {
     public function downloads()
