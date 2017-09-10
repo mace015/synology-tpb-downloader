@@ -6,38 +6,33 @@ use Illuminate\Http\Request;
 
 use App\Repositories\DownloadStation;
 
-use Redirect;
 
 class DownloadController extends Controller
 {
+    public function downloads()
+    {
+        $downloadStation = new DownloadStation();
 
-	public function downloads() {
+        $downloads = $downloadStation->api()->getTaskList();
 
-		$downloadStation = new DownloadStation();
+        return $downloads->tasks;
+    }
 
-		$downloads = $downloadStation->api()->getTaskList();
+    public function download()
+    {
+        $downloadStation = new DownloadStation();
 
-		return $downloads->tasks;
+        $download = $downloadStation->api()->addTask(request()->magnet);
 
-	}
-    
-	public function download() {
+        return 'true';
+    }
 
-		$downloadStation = new DownloadStation();
+    public function deleteDownload()
+    {
+        $downloadStation = new DownloadStation();
 
-		$download = $downloadStation->api()->addTask(request()->magnet);
+        $download = $downloadStation->api()->deleteTask(request()->id);
 
-		return 'true';
-
-	}
-
-	public function deleteDownload() {
-
-		$downloadStation = new DownloadStation();
-
-		$download = $downloadStation->api()->deleteTask(request()->id);
-
-		return 'true';
-	}
-
+        return 'true';
+    }
 }

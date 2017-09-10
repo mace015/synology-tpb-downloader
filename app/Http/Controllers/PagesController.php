@@ -10,29 +10,25 @@ use View;
 
 class PagesController extends Controller
 {
-    
-	public function index() {
+    public function index()
+    {
+        return View::make('index', compact('search', 'results', 'downloads'));
+    }
 
-		return View::make('index', compact('search', 'results', 'downloads'));
+    public function search()
+    {
+        $torrents = [];
 
-	}
+        $results = (new TorrentScraperService(['thePirateBay']))->search(request()->search);
 
-	public function search() {
+        foreach ($results as $result) {
+            $torrents[] = [
+                'name'    => $result->getName(),
+                'seeders' => $result->getSeeders(),
+                'magnet'  => $result->getMagnetUrl()
+            ];
+        }
 
-		$torrents = [];
-
-		$results = (new TorrentScraperService(['thePirateBay']))->search(request()->search);
-
-		foreach ($results as $result) {
-			$torrents[] = [
-				'name'    => $result->getName(),
-				'seeders' => $result->getSeeders(),
-				'magnet'  => $result->getMagnetUrl()
-			];
-		}
-
-		return $torrents;
-
-	}
-
+        return $torrents;
+    }
 }
