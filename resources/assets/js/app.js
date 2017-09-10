@@ -22,6 +22,7 @@ const app = new Vue({
     		downloads: [],
     		query: '',
     		results: [],
+            download_modal_open: false,
     		is_loading_downloads: false,
     		is_loading_results: false
     	}
@@ -61,7 +62,13 @@ const app = new Vue({
 				this.getDownloads();
                 $(element).removeClass('is-loading');
 			});
-    	}
+    	},
+        openDownloadModal() {
+            this.download_modal_open = true;
+        },
+        closeDownloadModal() {
+            this.download_modal_open = false;
+        }
     }
 
 });

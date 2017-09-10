@@ -9,7 +9,7 @@ This application is meant to be used with a Synology NAS to easily activate torr
 - Activating downloads directly on your Synology NAS. ( **Done** )
 - Show active downloads on the Synology Download Station. ( **Done** )
 - Protect the application via a simple authentication system. ( **Done** )
-- Rebuilding the search interface with vue.js to provide a more fluent experience.
+- Rebuilding the search interface with vue.js to provide a more fluent experience. ( **Done** )
 
 
 ## How to use:
